@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>Test web service </head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<body ng-App = "myApp" >
+<div  ng-controller = "myController">
+<h1>test </h1>
+<p id = "data1" style="color:red;"></p>
+<h1 id = "data2"></h1>
+<h1 style="color:red;" >{{sucessResponse}}</h1>
+<h2 style="color:red;"> "Error " : {{errorResponse}}</h2>
+
+</div>
+
+<script>
+
+var app = angular.module('myApp', []);
+app.controller('myController', function($scope, $http){
+
+$http({
+
+method : "GET" , 
+url : "https://dev57394.service-now.com/api/now/table/incident?sysparm_limit=10&sysparm_query_no_domain=false",
+headers : {
+"Authorization" : "Bearer nf1JAOk5wSqpUBA-X3oiu4YVe1Qj_TP5KKje1tX8MgqYmhnQod9d6pgGyBtuK638scGwlcUmMQDiWRc1JRmePg",
+"Content-type" : "application/json",
+
+ }
+
+}).then(function mySuccess(response){
+	$scope.sucessResponse = response;
+
+}, function myError(response){
+
+$scope.errorResponse = response;
+
+});
+
+});
+
+</script>
+</body>
